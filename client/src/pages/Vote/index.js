@@ -50,7 +50,7 @@ function Vote() {
 
         <div className={"header"}>
           <div>
-            <h2>Elegí tu ganador</h2>
+            <h2 className="title">Elegí tu ganador</h2>
             <h3 className="subtitle">Usa tus tokens para votar</h3>
           </div>
           <div>

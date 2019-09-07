@@ -13,6 +13,12 @@
   flex-direction: column;
 }
 
+.title{
+  @media only screen and (max-width: 480px) {
+    text-align: center;
+  }
+}
+
 .subtitle {
   color: #757575
 }
@@ -35,7 +41,6 @@
   &:hover {
     background-color: #BBC4EF;
   }
-  
 }
 
 .header {
@@ -43,6 +48,9 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+  }
 }
 
 .lobster {
