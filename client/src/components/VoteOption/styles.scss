@@ -1,0 +1,21 @@
+.vote-option {
+  margin: 20px;
+}
+
+.vote-selectable {
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.img-vote {
+  width: 100%;
+  object-fit: cover;
+  background-size: cover;
+  position: relative;
+
+}
+
+.outFocus-option {
+    opacity: 0.4
+}

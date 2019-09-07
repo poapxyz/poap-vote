@@ -5,6 +5,14 @@
   margin: 0 auto 72px auto;
 }
 
+.loading-container{
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .lobster {
   cursor: pointer;
   max-width: 164px;

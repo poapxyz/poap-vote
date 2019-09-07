@@ -8,6 +8,7 @@ import Layout from '../../components/Layout';
 import kingOfLobsters from '../../assets/images/king-of-lobsters.png';
 /* Provider */
 import { VotesContext } from '../../context';
+import VoteOption from '../../components/VoteOption';
 
 function Vote() {
   const {
@@ -22,9 +23,11 @@ function Vote() {
     return (
       <Layout>
         <div className="container">
-          <img src={kingOfLobsters} alt="King of Lobsters" className="king-of-lobsters" />
-          <div>
-            <h2>Cargando tus tokens...</h2>
+          <div className="loading-container">
+            <img src={kingOfLobsters} alt="King of Lobsters" className="king-of-lobsters" />
+            <div>
+              <h2>Cargando tus tokens...</h2>
+            </div>
           </div>
         </div>
       </Layout>
@@ -50,9 +53,12 @@ function Vote() {
 
         <div className="grid">
           {Object.entries(lobsters).map(([id, lobster]) => (
-            <div key={id} className="lobster" onClick={() => voteLobster(id)}>
-              <img src={lobster.image} alt="Lobster" />
-            </div>
+            <VoteOption key={id} 
+              image={lobster.image} 
+              action={() => voteLobster(id)}
+              disabled={true}
+              selected={false}
+              outFocus={true} />
           ))}
         </div>
       </div>

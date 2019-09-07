@@ -9,7 +9,7 @@ const matoken = '0x5A384227B65FA093DEC03Ec34e111Db80A040615';
 
 const fakeLobsters = Array.from({ length: 10 }, (_, index) => [
   index,
-  { image: 'https://cdn.pixabay.com/photo/2018/04/20/17/18/cat-3336579__340.jpg' },
+  { image: require('../assets/proposals/proposal1.png') },
 ]);
 
 /* Initial State */
