@@ -1,8 +1,8 @@
 .king-of-lobsters {
   display: block;
   max-width: 258px;
-  margin-bottom: 72px;
-  margin: 0 auto 72px auto;
+  margin-bottom: 50px;
+  margin: 0 auto 50px auto;
 }
 
 .loading-container{
@@ -13,6 +13,46 @@
   flex-direction: column;
 }
 
+.title{
+  @media only screen and (max-width: 480px) {
+    text-align: center;
+  }
+}
+
+.subtitle {
+  color: #757575
+}
+
+.poap-badge{
+  height: 40px;
+  padding-right: 15px;
+}
+
+.badge-box {
+  border: 4px solid #BBC4EF;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 400;
+  &:hover {
+    background-color: #BBC4EF;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
 .lobster {
   cursor: pointer;
   max-width: 164px;
@@ -20,4 +60,20 @@
   img {
     border-radius: 100%;
   }
+}
+
+.alert {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fccdd3;
+  border-radius: 10px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.alert-text {
+  padding-right: 20px;
 }
