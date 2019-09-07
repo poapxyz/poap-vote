@@ -46,19 +46,21 @@ function Vote() {
             <h3>Buscanos en ETHBoston</h3>
           </div>
         )}
- 
+
+
         <div className={"header"}>
           <div>
             <h2>Elegí tu ganador</h2>
             <h3 className="subtitle">Usa tus tokens para votar</h3>
           </div>
           <div>
+
+            {/* This component should appear only when we have an address */}
             <div className="badge-box">
               <img src={badge} className="poap-badge" />
               <div>{poap.tokens.length} Tokens</div>
             </div>
           </div>
-          
         </div>
 
         <div className="grid">
@@ -66,9 +68,9 @@ function Vote() {
             <VoteOption key={id} 
               image={lobster.image} 
               action={() => voteLobster(id)}
-              disabled={true}
+              disabled={false}
               selected={false}
-              outFocus={true} />
+              outFocus={false} />
           ))}
         </div>
       </div>

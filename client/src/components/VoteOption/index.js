@@ -17,11 +17,10 @@ import shapeFront from '../../assets/images/shapeFront.png'
 const VoteOption = (props) => {
   const {image, action, disabled, selected, outFocus} = props
   return (
-    <div className={`vote-option ${outFocus ? "outFocus-option": ''} ${disabled ? '' : 'vote-selectable'}`} onClick={() => action}>
+    <div className={`vote-option ${outFocus ? "outFocus-option": ''} ${disabled ? '' : 'vote-selectable'}`} onClick={() => disabled ? console.log('disabled') : action}>
       <img src={selected ? shapeFrontSelected : shapeFront} alt="Lobster" className="img-vote" style={{backgroundImage: `url(${image})`}}/>
     </div>
   )
-  
 };
 
 export default VoteOption;
