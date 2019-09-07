@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { accountFetched, web3Failed, web3Fetched, web3Request } from '../../modules/web3/actions';
+import { accountFetched, web3Failed, web3Fetched, web3Request, tokensFetched } from '../../modules/web3/actions';
+import { voteOptionFetched } from '../../modules/lobsters/actions';
 import Loader from '../../components/Layout/components/Loader';
 
 /* Styles */
@@ -14,19 +15,25 @@ import kingOfLobstersSmall from '../../assets/images/king-of-lobsters-small.png'
 import badge from '../../assets/images/poap-badge.png';
 /* Utils */
 import { getWeb3 } from '../../utils/web3';
+import CONSTANTS from '../../utils/constants';
+import ABI_TOKEN from '../../artifacts/Poap.json';
+import ABI_VOTE from '../../artifacts/VotePoap.json';
 
 class Vote extends Component {
   state = {
+    tokenContract: null,
+    voteContract: null,
     selected: null,
     loadingMessage: 'Loading proposals',
     loading: true,
+    voted: false,
   };
 
   componentDidMount = async () => {
     let { web3Request, web3Fetched, web3Failed, accountFetched, w3 } = this.props;
-    if (!w3.web3) {
-      let web3 = null;
+    let web3 = w3.web3;
 
+    if (!web3) {
       // Fetch web3 instance
       web3Request();
       try {
@@ -38,18 +45,70 @@ class Vote extends Component {
         console.log('Error fetching web3:', e);
         web3Failed();
       }
+    }
 
+    if (web3) {
       // Fetch account if possible
-      if (web3) {
-        try {
-          const accounts = await web3.eth.getAccounts();
-          accountFetched(accounts[0]);
-          // remove loader
-          this.setState({loading: false })
-        } catch (e) {
-          console.log('Error fetching account:', e);
-        }
+      let account = null;
+      await this.initContracts(web3);
+
+      try {
+        const accounts = await web3.eth.getAccounts();
+        account = accounts[0];
+        accountFetched(account);
+      } catch (e) {
+        console.log('Error fetching account:', e);
       }
+
+      if (account) {
+        await this.fetchTokens(account);
+        await this.fetchUserVote(account);
+      }
+
+      await this.fetchVoteOptions();
+    }
+  };
+
+  initContracts = async web3 => {
+    const tokenContract = await new web3.eth.Contract(ABI_TOKEN, CONSTANTS.tokenContractAddress);
+    const voteContract = await new web3.eth.Contract(ABI_VOTE, CONSTANTS.voteContractAddress);
+    await this.setState({ tokenContract, voteContract });
+  };
+
+  fetchTokens = async account => {
+    let { tokenContract } = this.state;
+    let balance = await tokenContract.methods.balanceOf(account).call();
+    this.props.tokensFetched(parseInt(balance));
+  };
+
+  fetchUserVote = async account => {
+    let { voteContract } = this.state;
+    let vote = await voteContract.methods.getVote(account).call();
+    // vote = {
+    // 0: option
+    // 1: tokens
+    // 2: weightedVote
+    // }
+    if (parseInt(vote[1]) > 0) {
+      await this.setState({ voted: true, selected: parseInt(vote[10]) });
+    }
+  };
+
+  fetchVoteOptions = async () => {
+    let { voteContract } = this.state;
+    let voteOptionsCount = await voteContract.methods.proposalNonce().call();
+    const arrayTimes = Array.from({ length: voteOptionsCount });
+
+    let counter = 0;
+    for await (const time of arrayTimes) {
+      let voteOption = await voteContract.methods.getProposal(counter).call();
+      this.props.voteOptionFetched({
+        index: counter,
+        image: voteOption[0],
+        voteCount: voteOption[1],
+        weightedVotes: voteOption[2],
+      });
+      counter++;
     }
   };
 
@@ -68,15 +127,9 @@ class Vote extends Component {
   }
 
   render() {
-    let { w3 } = this.props;
-    let { selected, loading, loadingMessage } = this.state;
+    let { w3, lobsters } = this.props;
+    let { selected } = this.state;
     let voted = false;
-
-    const fakeLobsters = Array.from({ length: 10 }, (_, index) => [
-      index,
-      { image: require('../../assets/proposals/proposal1.png') },
-    ]);
-    const lobsters = Object.fromEntries(fakeLobsters);
 
     return (
       <Layout>
@@ -160,11 +213,15 @@ class Vote extends Component {
 const mapStateToProps = state => {
   return {
     w3: state.web3,
+    lobsters: state.lobsters,
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ web3Request, web3Failed, web3Fetched, accountFetched }, dispatch);
+  return bindActionCreators(
+    { web3Request, web3Failed, web3Fetched, accountFetched, tokensFetched, voteOptionFetched },
+    dispatch,
+  );
 };
 
 export default connect(

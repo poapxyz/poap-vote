@@ -1,5 +1,5 @@
 /* Actions */
-import { WEB3_REQUEST, WEB3_FAILURE, WEB3_SUCCESS, WEB3_ACCOUNT_FETCHED } from './actions';
+import { WEB3_REQUEST, WEB3_FAILURE, WEB3_SUCCESS, WEB3_ACCOUNT_FETCHED, POAP_TOKENS_FETCHED } from './actions';
 
 /* Initial State */
 const INITIAL_STATE = {
@@ -37,6 +37,13 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         account: action.payload,
+      };
+    }
+
+    case POAP_TOKENS_FETCHED: {
+      return {
+        ...state,
+        tokens: action.payload,
       };
     }
 
