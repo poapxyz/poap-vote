@@ -1,15 +1,20 @@
 /* Actions */
-// import {  } from './actions';
+import { VOTE_OPTION_FETCHED } from './actions';
 
 /* Initial State */
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  options: {},
+};
 
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'fake': {
+    case VOTE_OPTION_FETCHED: {
       return {
         ...state,
-        isLoading: true,
+        options: {
+          ...state.options,
+          [action.payload.index]: action.payload,
+        },
       };
     }
 
