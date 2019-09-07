@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 /* Styles */
 import './styles.scss';
@@ -6,6 +6,7 @@ import './styles.scss';
 import Layout from '../../components/Layout';
 /* Assets */
 import kingOfLobsters from '../../assets/images/king-of-lobsters.png';
+import kingOfLobstersSmall from '../../assets/images/king-of-lobsters-small.png';
 /* Provider */
 import { VotesContext } from '../../context';
 import VoteOption from '../../components/VoteOption';
@@ -16,16 +17,23 @@ function Vote() {
     state: { web3, lobsters, poap },
     actions: { voteLobster },
   } = useContext(VotesContext);
+  const [state, setState] = useState({selected: 2});
+
+  const changeSelection = (id) => {
+    setState({ selected: id});
+  }
+
   console.log('TCL: Vote -> lobsters', lobsters);
   console.log('TCL: Vote -> poap', poap);
   console.log('TCL: Vote -> web3', web3);
 
+ 
   if (poap.isLoadingTokens) {
     return (
       <Layout>
         <div className="container">
           <div className="loading-container">
-            <img src={kingOfLobsters} alt="King of Lobsters" className="king-of-lobsters" />
+            <img src={kingOfLobstersSmall} alt="King of Lobsters" className="king-of-lobsters" />
             <div>
               <h2>Cargando tus tokens...</h2>
             </div>
@@ -38,15 +46,17 @@ function Vote() {
   return (
     <Layout>
       <div className="container">
-        <img src={kingOfLobsters} alt="King of Lobsters" className="king-of-lobsters" />
+        <img src={kingOfLobstersSmall} alt="King of Lobsters" className="king-of-lobsters" />
 
+        <div>
+            <div>Wanna vote? you need a web3 conection like Metamask</div>
+        </div>
         {poap.tokens.length === 0 && (
           <div>
             <h2>Necesitas badges para votar</h2>
             <h3>Buscanos en ETHBoston</h3>
           </div>
         )}
-
 
         <div className={"header"}>
           <div>
@@ -66,10 +76,12 @@ function Vote() {
         <div className="grid">
           {Object.entries(lobsters).map(([id, lobster]) => (
             <VoteOption key={id} 
+              id={id}
               image={lobster.image} 
-              action={() => voteLobster(id)}
+              // action={() => voteLobster(id)}
+              action={changeSelection}
               disabled={false}
-              selected={false}
+              selected={state.selected == id}
               outFocus={false} />
           ))}
         </div>
