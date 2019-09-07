@@ -72,6 +72,6 @@ function getVoters () {
 }
 
 getData();
-getProposals();
+// getProposals();
 // getVoters();
 
