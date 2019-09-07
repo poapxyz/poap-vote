@@ -9,6 +9,7 @@ import './styles/index.scss';
 /* Pages */
 import Home from './pages/Home';
 import Vote from './pages/Vote';
+import Thanks from './pages/Thanks';
 /* Redux */
 import { configureStore, history } from './store';
 /* Store & Sentry Config */
@@ -25,6 +26,7 @@ const App = () => {
         <Switch>
           <Route exact path={'/'} component={Home} />
           <Route exact path={'/vote'} component={Vote} />
+          <Route exact path={'/thanks'} component={Thanks} />
           <Route exact path="*" render={() => <Redirect to={'/'} />} />
         </Switch>
       </ConnectedRouter>

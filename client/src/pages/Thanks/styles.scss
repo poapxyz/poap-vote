@@ -1,0 +1,25 @@
+.king-of-lobsters {
+  display: block;
+  max-width: 258px;
+  margin-bottom: 50px;
+  margin: 0 auto 50px auto;
+}
+
+.title{
+  @media only screen and (max-width: 480px) {
+    text-align: center;
+  }
+}
+
+.subtitle {
+  color: #757575
+}
+
+.thanks{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 40vh;
+
+}
