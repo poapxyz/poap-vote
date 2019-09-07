@@ -9,6 +9,7 @@ import kingOfLobsters from '../../assets/images/king-of-lobsters.png';
 /* Provider */
 import { VotesContext } from '../../context';
 import VoteOption from '../../components/VoteOption';
+import badge from '../../assets/images/poap-badge.png'
 
 function Vote() {
   const {
@@ -45,10 +46,19 @@ function Vote() {
             <h3>Buscanos en ETHBoston</h3>
           </div>
         )}
-
-        <div>
-          <h2>Elegí tu ganador</h2>
-          <h3>Usa tus tokens para votar</h3>
+ 
+        <div className={"header"}>
+          <div>
+            <h2>Elegí tu ganador</h2>
+            <h3 className="subtitle">Usa tus tokens para votar</h3>
+          </div>
+          <div>
+            <div className="badge-box">
+              <img src={badge} className="poap-badge" />
+              <div>{poap.tokens.length} Tokens</div>
+            </div>
+          </div>
+          
         </div>
 
         <div className="grid">
