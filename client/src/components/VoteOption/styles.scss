@@ -19,3 +19,20 @@
 .outFocus-option {
     opacity: 0.4
 }
+
+.fadein {
+  opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0.45;
+	}
+	100% {
+		opacity: 1;
+	}
+}
