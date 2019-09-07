@@ -15,7 +15,7 @@ module.exports = (done) => {
       throw result.error;
     }
 
-    let contractAddress = '0x9eeDe127d72fe7851CdB3182b0b21E883408EB46';
+    let contractAddress = '0x3C1a6B4a6fE7150D5514aaf23220215b156215aF';
     if (networkID === 1) {
       contractAddress = process.env.POAP_VOTE_ADDRESS;
     }

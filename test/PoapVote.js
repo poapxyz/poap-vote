@@ -1,15 +1,15 @@
 /*
 
-npx zos session --network local --from 0xAa82FdE1a5266971b27f135d16d282fA20b84C94 --expires 3600
-zos push
-zos create VotePoap --init initialize --args '0xd237716b056d5BF44181c471A7c633583b552D78, 1569059900,[]'
+npx zos session --network local --from 0x4Ab6E2dA6E6E3977F0D458f11F6A555C01780D57 --expires 3600
+oz push
+oz create VotePoap --init initialize --args '0x69BD976345ED8462f723d1Fa9261fD37f667dCDd, 1597825200,[]'
 
 * */
 const Web3 = require('web3');
 const abi = require('../build/contracts/VotePoap.json');
 
 const web3 = new Web3('http://localhost:7545');
-const contractAddress = '0x9eeDe127d72fe7851CdB3182b0b21E883408EB46';
+const contractAddress = '0x7BADC340820BD1bd3CB58F5607Ed5222Bb518Ee8';
 
 const contract = new web3.eth.Contract(abi.abi, contractAddress);
 
@@ -34,25 +34,31 @@ web3.eth.getAccounts()
     // contract.methods.addProposal(proposals[1]).send({from: accounts[0], gas: 1000000});
     // contract.methods.addProposal(proposals[2]).send({from: accounts[0], gas: 1000000});
     // contract.methods.addProposal(proposals[3]).send({from: accounts[0], gas: 1000000});
+    // contract.methods.changeProposal(1, 'RAMA').send({from: accounts[0], gas: 1000000});
+    // contract.methods.changeProposal(2, 'RAMA').send({from: accounts[0], gas: 1000000});
+    // contract.methods.changeProposal(10, 'RAMA').send({from: accounts[0], gas: 1000000});
 
     // Vote
     // contract.methods.vote(3).send({from: accounts[0], gas: 1000000});
     // contract.methods.vote(3).send({from: accounts[1], gas: 1000000});
     // contract.methods.vote(3).send({from: accounts[2], gas: 1000000});
     // contract.methods.vote(3).send({from: accounts[3], gas: 1000000});
+
+    // Activate
+    // contract.methods.activate().send({from: accounts[0], gas: 1000000});
 });
 
 function getData() {
   contract.methods.proposalNonce().call().then(r => console.log('proposalNonce: ', r));
   contract.methods.voteActive().call().then(r => console.log('Active: ', r));
   contract.methods.endDate().call().then(r => console.log('endDate: ', r));
+  contract.methods.isExpired().call().then(r => console.log('isExpired: ', r));
 }
 
 function getProposals () {
-  contract.methods.getProposal(0).call().then(r => console.log('proposal: ', r));
   contract.methods.getProposal(1).call().then(r => console.log('proposal: ', r));
   contract.methods.getProposal(2).call().then(r => console.log('proposal: ', r));
-  contract.methods.getProposal(3).call().then(r => console.log('proposal: ', r));
+  contract.methods.getProposal(10).call().then(r => console.log('proposal: ', r));
 }
 
 function getVoters () {
@@ -66,6 +72,6 @@ function getVoters () {
 }
 
 getData();
-// getProposals();
+getProposals();
 // getVoters();
 

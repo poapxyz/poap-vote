@@ -113,6 +113,15 @@ contract VotePoap is Initializable, PoapRoles {
     }
 
     /**
+     * @dev Method to update proposal image
+     * @param _index URL where proposal image is hosted
+     * @param _image URL where proposal image is hosted
+     */
+    function changeProposal(uint _index, string memory _image) public onlyAdmin whenActive {
+        proposals[_index].image = _image;
+    }
+
+    /**
      * @dev Method for users to vote
      * @param _proposal Proposal index
      */
