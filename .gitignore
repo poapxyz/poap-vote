@@ -73,5 +73,7 @@ build
 .vscode
 .openzeppelin/.session
 
+client/.firebase/
+
 # IDE
 .idea/

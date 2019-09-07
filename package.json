@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre-push": "cd client && npm run pre-push",
-    "pre-commit": "cd client && npm run pre-commit"
+    "pre-commit": "cd client && npm run pre-commit",
+    "add-proposal:ganache": "truffle exec --network local ./scripts/upload_proposal.js"
   },
   "husky": {
     "hooks": {
@@ -38,6 +39,7 @@
   "homepage": "https://github.com/OpenZeppelin/starter-kit/blob/stable/README.md",
   "dependencies": {
     "dotenv": "^6.2.0",
+    "ethereumjs-abi": "^0.6.8",
     "openzeppelin-eth": "^2.2.0",
     "truffle-hdwallet-provider": "^1.0.3",
     "zos": "^2.4.2",

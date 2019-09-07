@@ -27,7 +27,7 @@ const addresses = [
 web3.eth.getAccounts()
   .then(accounts => {
 
-    contract.methods.relayedVote(addresses[6], 2).send({from: addresses[0], gas: 1000000}).then(console.log);
+    // contract.methods.relayedVote(addresses[6], 2).send({from: addresses[0], gas: 1000000}).then(console.log);
 
     // Add Proposals
     // contract.methods.addProposal(proposals[0]).send({from: accounts[0], gas: 1000000});
@@ -43,6 +43,7 @@ web3.eth.getAccounts()
 });
 
 function getData() {
+  contract.methods.proposalNonce().call().then(r => console.log('proposalNonce: ', r));
   contract.methods.voteActive().call().then(r => console.log('Active: ', r));
   contract.methods.endDate().call().then(r => console.log('endDate: ', r));
 }
@@ -64,7 +65,7 @@ function getVoters () {
   contract.methods.getVote(addresses[6]).call().then(r => console.log('Vote: ', r));
 }
 
-// getData();
-getProposals();
-getVoters();
+getData();
+// getProposals();
+// getVoters();
 
