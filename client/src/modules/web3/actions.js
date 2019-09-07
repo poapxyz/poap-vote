@@ -5,6 +5,8 @@ export const WEB3_FAILURE = 'WEB3_FAILURE';
 
 export const WEB3_ACCOUNT_FETCHED = 'WEB3_ACCOUNT_FETCHED';
 
+export const POAP_TOKENS_FETCHED = 'POAP_TOKENS_FETCHED';
+
 /* Action Generators */
 export function web3Request() {
   return {
@@ -26,9 +28,15 @@ export function web3Fetched(payload) {
 }
 
 export function accountFetched(payload) {
-  console.log(payload);
   return {
     type: WEB3_ACCOUNT_FETCHED,
+    payload: payload,
+  };
+}
+
+export function tokensFetched(payload) {
+  return {
+    type: POAP_TOKENS_FETCHED,
     payload: payload,
   };
 }

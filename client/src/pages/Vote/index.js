@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { accountFetched, web3Failed, web3Fetched, web3Request } from '../../modules/web3/actions';
+import { accountFetched, web3Failed, web3Fetched, web3Request, tokensFetched } from '../../modules/web3/actions';
 
 /* Styles */
 import './styles.scss';
@@ -13,17 +13,22 @@ import kingOfLobstersSmall from '../../assets/images/king-of-lobsters-small.png'
 import badge from '../../assets/images/poap-badge.png';
 /* Utils */
 import { getWeb3 } from '../../utils/web3';
+import CONSTANTS from '../../utils/constants';
+import ABI_TOKEN from '../../artifacts/Poap.json';
+import ABI_VOTE from '../../artifacts/VotePoap.json';
 
 class Vote extends Component {
   state = {
+    tokenContract: null,
+    voteContract: null,
     selected: null,
   };
 
   componentDidMount = async () => {
     let { web3Request, web3Fetched, web3Failed, accountFetched, w3 } = this.props;
-    if (!w3.web3) {
-      let web3 = null;
+    let web3 = w3.web3;
 
+    if (!web3) {
       // Fetch web3 instance
       web3Request();
       try {
@@ -33,17 +38,37 @@ class Vote extends Component {
         console.log('Error fetching web3:', e);
         web3Failed();
       }
+    }
 
+    if (web3) {
       // Fetch account if possible
-      if (web3) {
-        try {
-          const accounts = await web3.eth.getAccounts();
-          accountFetched(accounts[0]);
-        } catch (e) {
-          console.log('Error fetching account:', e);
-        }
+      let account = null;
+      this.initContracts(web3);
+
+      try {
+        const accounts = await web3.eth.getAccounts();
+        account = accounts[0];
+        accountFetched(account);
+      } catch (e) {
+        console.log('Error fetching account:', e);
+      }
+
+      if (account) {
+        await this.fetchTokens(w3.web3 ? w3.web3 : web3, account);
       }
     }
+  };
+
+  initContracts = async web3 => {
+    const tokenContract = new web3.eth.Contract(ABI_TOKEN, CONSTANTS.tokenContractAddress);
+    const voteContract = new web3.eth.Contract(ABI_VOTE, CONSTANTS.voteContractAddress);
+    await this.setState({ tokenContract, voteContract });
+  };
+
+  fetchTokens = async (web3, account) => {
+    let { tokenContract } = this.state;
+    let balance = await tokenContract.methods.balanceOf(account).call();
+    this.props.tokensFetched(parseInt(balance));
   };
 
   canVote = () => {
@@ -163,7 +188,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ web3Request, web3Failed, web3Fetched, accountFetched }, dispatch);
+  return bindActionCreators({ web3Request, web3Failed, web3Fetched, accountFetched, tokensFetched }, dispatch);
 };
 
 export default connect(
