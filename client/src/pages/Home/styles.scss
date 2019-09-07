@@ -1,0 +1,15 @@
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .king-of-lobsters {
+    max-width: 258px;
+    margin-bottom: 72px;
+  }
+
+  .title-2 {
+    margin-bottom: 52px;
+  }
+}

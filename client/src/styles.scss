@@ -1,0 +1,95 @@
+:root {
+  --violet: #6535ff;
+  --font-size: calc(16px + 0.25vw);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+
+html {
+  line-height: 1.15;
+  word-break: break-word;
+  scroll-behavior: smooth;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100%;
+  font-size: var(--font-size);
+  overscroll-behavior: contain;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+ul {
+  list-style: none;
+}
+
+iframe {
+  border: none;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+img {
+  border: none;
+  height: auto;
+  max-width: 100%;
+}
+
+a,
+a:active,
+a:focus {
+  text-decoration: none;
+}
+
+[hidden] {
+  display: none;
+}
+
+[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Utils */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 996px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.title-2 {
+  color: #4b4b4b;
+  font-size: 30px;
+  line-height: 32px;
+  font-weight: bold;
+}
+
+.btn {
+  color: white;
+  font-size: 34px;
+  font-weight: bold;
+  padding: 10px 52px;
+  border-radius: 28px;
+  background-color: var(--violet);
+}
