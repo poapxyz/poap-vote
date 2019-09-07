@@ -1,0 +1,26 @@
+@import "../../../../styles/variables";
+
+.banner{
+  text-align: center;
+  background: var(--pink);
+  height: 60px;
+  line-height: 60px;
+  font-size: 24px;
+  font-weight: bold;
+
+  @media (max-width: $bp-m) {
+    font-size: 18px;
+  }
+
+
+  span{
+    color: var(--light-pink);
+  }
+
+  a{
+    margin: 0 5px;
+    color: white;
+    text-decoration: underline;
+  }
+
+}

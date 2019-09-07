@@ -1,6 +1,11 @@
 :root {
-  --violet: #6535ff;
+  --light-white-blue: #e9edf5;
+  --violet: #6534ff;
+  --pink: #F9879A;
+  --light-pink: #FCCDD3;
   --font-size: calc(16px + 0.25vw);
+
+  --font-family: 'Archivo', sans-serif;
 }
 
 *,
@@ -24,11 +29,12 @@ html {
 body {
   min-height: 100%;
   font-size: var(--font-size);
+  background: var(--light-white-blue);
   overscroll-behavior: contain;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, 'Apple Color Emoji',
+  font-family: Archivo, system-ui, -apple-system, Segoe UI, Ubuntu, Cantarell, Noto Sans, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 

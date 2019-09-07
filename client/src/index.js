@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 /* Styles */
-import './styles.scss';
+import './styles/index.scss';
 /* Pages */
 import Home from './pages/Home';
 import Vote from './pages/Vote';
