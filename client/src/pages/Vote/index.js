@@ -17,10 +17,17 @@ function Vote() {
     state: { web3, lobsters, poap },
     actions: { voteLobster },
   } = useContext(VotesContext);
-  const [state, setState] = useState({selected: 2});
+
+  const [state, setState] = useState({selected: null, hasWeb3: true, hasWeb3Logged: true, voted: true});
 
   const changeSelection = (id) => {
-    setState({ selected: id});
+    setState(prevState => {
+      return { ...prevState, selected: id }
+    });
+  }
+
+  const canVote = () => {
+    return (state.hasWeb3 && state.hasWeb3Logged && poap.tokens.length > 0)
   }
 
   console.log('TCL: Vote -> lobsters', lobsters);
@@ -48,15 +55,30 @@ function Vote() {
       <div className="container">
         <img src={kingOfLobstersSmall} alt="King of Lobsters" className="king-of-lobsters" />
 
-        <div>
-            <div>Wanna vote? you need a web3 conection like Metamask</div>
-        </div>
-        {poap.tokens.length === 0 && (
-          <div>
-            <h2>Necesitas badges para votar</h2>
-            <h3>Buscanos en ETHBoston</h3>
-          </div>
-        )}
+        { !state.hasWeb3 && 
+          (<div className="alert">
+            <div>Wanna vote? you need a web3 connection like MetaMask</div>
+          </div>)}
+
+        {state.hasWeb3 && !state.hasWeb3Logged &&
+          (<div className="alert">
+            <div className="alert-text"> 
+              You should 
+            </div>
+            <button className="btn-sm" onClick={() => console.log('Click')}>
+              Connect to MetaMask
+            </button>
+        </div>)}
+
+        {state.hasWeb3 && state.hasWeb3Logged && poap.tokens.length === 0 &&
+          (<div className="alert">
+            <div>You need POAP tokens to vote. Check with your kickback address or <a href="#">come see us…</a></div>
+        </div>)}
+
+        {state.hasWeb3 && state.hasWeb3Logged && state.voted &&
+          (<div className="alert">
+            <div>You already voted but you can change you vote</div>
+        </div>)}
 
         <div className={"header"}>
           <div>
@@ -64,7 +86,6 @@ function Vote() {
             <h3 className="subtitle">Usa tus tokens para votar</h3>
           </div>
           <div>
-
             {/* This component should appear only when we have an address */}
             <div className="badge-box">
               <img src={badge} className="poap-badge" />
@@ -80,10 +101,15 @@ function Vote() {
               image={lobster.image} 
               // action={() => voteLobster(id)}
               action={changeSelection}
-              disabled={false}
+              disabled={!canVote()}
               selected={state.selected == id}
-              outFocus={false} />
+              outFocus={!canVote()} />
           ))}
+        </div>
+        <div className="intro">
+          <button className="btn-pink" onClick={() => console.log('navigate')}>
+            VOTE NOW!
+          </button>
         </div>
       </div>
     </Layout>

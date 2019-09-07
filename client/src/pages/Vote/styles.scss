@@ -1,8 +1,8 @@
 .king-of-lobsters {
   display: block;
   max-width: 258px;
-  margin-bottom: 72px;
-  margin: 0 auto 72px auto;
+  margin-bottom: 50px;
+  margin: 0 auto 50px auto;
 }
 
 .loading-container{
@@ -60,4 +60,20 @@
   img {
     border-radius: 100%;
   }
+}
+
+.alert {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fccdd3;
+  border-radius: 10px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.alert-text {
+  padding-right: 20px;
 }
