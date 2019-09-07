@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre-push": "cd client && npm run pre-push",
     "pre-commit": "cd client && npm run pre-commit",
-    "add-proposal:ganache": "truffle exec --network local ./scripts/upload_proposal.js"
+    "add-proposal:ganache": "truffle exec --network local ./scripts/upload_proposal.js",
+    "add-proposal:mainnet": "truffle exec --network mainnet ./scripts/upload_proposal.js"
   },
   "husky": {
     "hooks": {

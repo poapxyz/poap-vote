@@ -1,4 +1,7 @@
-import React, { useContext } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { accountFetched, web3Failed, web3Fetched, web3Request } from '../../modules/web3/actions';
 
 /* Styles */
 import './styles.scss';
@@ -7,63 +10,52 @@ import Layout from '../../components/Layout';
 /* Assets */
 import kingOfLobsters from '../../assets/images/king-of-lobsters.png';
 /* Provider */
-import { VotesContext } from '../../context';
-import VoteOption from '../../components/VoteOption';
+import { getWeb3 } from '../../utils/web3';
 
-function Vote() {
-  const {
-    state: { web3, lobsters, poap },
-    actions: { voteLobster },
-  } = useContext(VotesContext);
-  console.log('TCL: Vote -> lobsters', lobsters);
-  console.log('TCL: Vote -> poap', poap);
-  console.log('TCL: Vote -> web3', web3);
+class Vote extends Component {
+  componentDidMount = async () => {
+    let { web3Request, web3Fetched, web3Failed, accountFetched, w3 } = this.props;
+    if (!w3.web3) {
+      let web3 = null;
 
-  if (poap.isLoadingTokens) {
-    return (
-      <Layout>
-        <div className="container">
-          <div className="loading-container">
-            <img src={kingOfLobsters} alt="King of Lobsters" className="king-of-lobsters" />
-            <div>
-              <h2>Cargando tus tokens...</h2>
-            </div>
-          </div>
-        </div>
-      </Layout>
-    );
+      // Fetch web3 instance
+      web3Request();
+      try {
+        web3 = await getWeb3();
+        web3Fetched(web3);
+      } catch (e) {
+        console.log('Error fetching web3:', e);
+        web3Failed();
+      }
+
+      // Fetch account if possible
+      if (web3) {
+        try {
+          const accounts = await web3.eth.getAccounts();
+          accountFetched(accounts[0]);
+        } catch (e) {
+          console.log('Error fetching account:', e);
+        }
+      }
+    }
+  };
+
+  render() {
+    let { lobsters, w3 } = this.props;
+    return <h1>Vote</h1>;
   }
-
-  return (
-    <Layout>
-      <div className="container">
-        <img src={kingOfLobsters} alt="King of Lobsters" className="king-of-lobsters" />
-
-        {poap.tokens.length === 0 && (
-          <div>
-            <h2>Necesitas badges para votar</h2>
-            <h3>Buscanos en ETHBoston</h3>
-          </div>
-        )}
-
-        <div>
-          <h2>Elegí tu ganador</h2>
-          <h3>Usa tus tokens para votar</h3>
-        </div>
-
-        <div className="grid">
-          {Object.entries(lobsters).map(([id, lobster]) => (
-            <VoteOption key={id} 
-              image={lobster.image} 
-              action={() => voteLobster(id)}
-              disabled={true}
-              selected={false}
-              outFocus={true} />
-          ))}
-        </div>
-      </div>
-    </Layout>
-  );
 }
+const mapStateToProps = state => {
+  return {
+    w3: state.web3,
+  };
+};
 
-export default Vote;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ web3Request, web3Failed, web3Fetched, accountFetched }, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Vote);

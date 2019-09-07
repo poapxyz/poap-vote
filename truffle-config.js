@@ -10,7 +10,7 @@ const configNetwok = (network, networkId, path = "m/44'/60'/0'/0/", gas = 446503
     mnemonic, `https://${network}.infura.io/v3/${INFURA_ID}`, 
         0, 1, true, path
     ),
-  networkId,
+  network_id: networkId,
   gas,
   gasPrice,
 });
@@ -27,6 +27,6 @@ module.exports = {
     ropsten: configNetwok('ropsten', 3),
     kovan: configNetwok('kovan', 42),
     rinkeby: configNetwok('rinkeby', 4),
-    main: configNetwok('mainnet', 1),
+    mainnet: configNetwok('mainnet', 1),
   },
 };

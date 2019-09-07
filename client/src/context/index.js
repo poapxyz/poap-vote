@@ -1,8 +1,8 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import { useWeb3Injected } from '@openzeppelin/network/react';
+import { useWeb3Context } from '@openzeppelin/network/react';
 
 /* Hooks */
-import useGetPoapTokens from './hooks';
+import { useGetPoapTokens } from './hooks';
 
 // matoken.eth address
 const matoken = '0x5A384227B65FA093DEC03Ec34e111Db80A040615';
@@ -62,22 +62,23 @@ const reducer = (state, action) => {
 };
 
 /* Votes Provider */
-const VotesProvider = ({ children }) => {
+const VotesProvider = ({ children, provider }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // 1. Connect to Web3 using metamask
-  const web3Context = useWeb3Injected();
+  console.log('provider: ', provider);
+  const web3Context = useWeb3Context(provider);
 
-  // 2. Get account addresss
+  // 2. Get account address
   const [userAccount = ''] = web3Context.accounts;
 
   // 3. Get POAP tokens
   const [tokens, isLoadingTokens] = useGetPoapTokens(matoken);
 
   // 4. Save Web3Context to state
-  useEffect(() => {
-    setWeb3Context(web3Context);
-  }, [web3Context]);
+  // useEffect(() => {
+  //   setWeb3Context(web3Context);
+  // }, [web3Context]);
 
   // 5. Save tokens to state
   useEffect(() => {
@@ -97,6 +98,10 @@ const VotesProvider = ({ children }) => {
     // Open metamask
     dispatch({ type: 'VOTE_LOBSTER', payload: { lobsterId } });
   };
+
+  // Component Did mount
+  // useEffect(async () => {
+  // }, [])
 
   return (
     <VotesContext.Provider

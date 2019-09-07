@@ -15,4 +15,4 @@ const useGetPoapTokens = address => {
   return [tokens, isLoadingTokens];
 };
 
-export default useGetPoapTokens;
+export { useGetPoapTokens };
