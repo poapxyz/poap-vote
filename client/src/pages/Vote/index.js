@@ -145,6 +145,11 @@ class Vote extends Component {
     this.setState({ selected: parseInt(id) });
   };
 
+  goToPoapScan = () => {
+    let { w3 } = this.props;
+    window.open(`https://app.poap.xyz/scan/${w3.account}`);
+  }
+
   randomLoadingQuote(){
     console.log('running')
     let random = QUOTES[Math.floor(Math.random() * QUOTES.length)];
@@ -172,7 +177,7 @@ class Vote extends Component {
   render() {
     let { w3, lobsters } = this.props;
     let { selected, loading, loadingMessage, voted } = this.state;
-
+    console.log(this.props)
     return (
       <Layout>
         <div className="container">
@@ -218,7 +223,7 @@ class Vote extends Component {
                 </div>
                 <div>
                   {/* This component should appear only when we have an address */}
-                  <div className="badge-box">
+                  <div className="badge-box" onClick={() => this.goToPoapScan()}>
                     <img src={badge} className="poap-badge" />
                     <div>{w3.tokens} Tokens</div>
                   </div>
