@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import { Web3Provider } from 'ethers/providers';
 
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
@@ -30,14 +31,26 @@ const getWeb3 = () =>
         );
         const web3 = new Web3(provider);
         console.log('No web3 instance injected, using Infura/Local web3.');
-        resolve(web3.currentProvider);
+        resolve(web3);
       }
       reject('No web3');
     });
   });
 
-const getSigner = web3 => {
-  const provider = web3.currentProvider;
+const hasCurrentProvider = () => {
+  return window.web3 && window.web3.currentProvider;
+};
+
+const getWeb3Provider = () => {
+  if (hasCurrentProvider()) {
+    return new Web3Provider(window.web3.currentProvider);
+  } else {
+    throw new Error('No Valid web3 provider found');
+  }
+};
+
+const getSigner = async () => {
+  const provider = await getWeb3Provider();
   return provider.getSigner();
 };
 
