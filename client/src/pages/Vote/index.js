@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { accountFetched, web3Failed, web3Fetched, web3Request, tokensFetched } from '../../modules/web3/actions';
 import { voteOptionFetched } from '../../modules/lobsters/actions';
+import Loader from '../../components/Layout/components/Loader';
 
 /* Styles */
 import './styles.scss';
@@ -23,11 +24,14 @@ class Vote extends Component {
     tokenContract: null,
     voteContract: null,
     selected: null,
+    loadingMessage: 'Loading proposals',
+    loading: true,
     voted: false,
   };
 
   componentDidMount = async () => {
     let { web3Request, web3Fetched, web3Failed, accountFetched, w3 } = this.props;
+    let { loadingMessage, loading } = this.state;
     let web3 = w3.web3;
 
     if (!web3) {
@@ -36,6 +40,8 @@ class Vote extends Component {
       try {
         web3 = await getWeb3();
         web3Fetched(web3);
+        // change msg loader
+        this.setState({ loadingMessage: 'Loading account tokens' });
       } catch (e) {
         console.log('Error fetching web3:', e);
         web3Failed();
@@ -51,6 +57,8 @@ class Vote extends Component {
         const accounts = await web3.eth.getAccounts();
         account = accounts[0];
         accountFetched(account);
+        // change loading msg
+        this.setState({ loadingMessage: 'Fetching your tokens' });
       } catch (e) {
         console.log('Error fetching account:', e);
       }
@@ -74,6 +82,7 @@ class Vote extends Component {
     let { tokenContract } = this.state;
     let balance = await tokenContract.methods.balanceOf(account).call();
     this.props.tokensFetched(parseInt(balance));
+    this.setState({ loadingMessage: 'Fetching votes' });
   };
 
   fetchUserVote = async account => {
@@ -90,6 +99,8 @@ class Vote extends Component {
   };
 
   fetchVoteOptions = async () => {
+    this.setState({ loadingMessage: 'Fetching proposal' });
+
     let { voteContract } = this.state;
     let voteOptionsCount = await voteContract.methods.proposalNonce().call();
     const arrayTimes = Array.from({ length: voteOptionsCount });
@@ -105,6 +116,7 @@ class Vote extends Component {
       });
       counter++;
     }
+    this.setState({ loading: false });
   };
 
   canVote = () => {
@@ -116,102 +128,93 @@ class Vote extends Component {
     this.setState({ selected: id });
   };
 
-  vote = async () => {
+  submitVote = async () => {
     let { selected, voteContract } = this.state;
     let { w3 } = this.props;
     if (!selected || !w3.account) return;
 
+    this.setState({ loading: true, loadingMessage: 'Submitting your vote' });
     let tx = await voteContract.methods.vote(selected).send({ from: w3.account });
     console.log(tx);
+    setTimeout(() => this.props.history.push('/thanks'), 3000);
   };
 
   render() {
     let { w3, lobsters } = this.props;
-    let { selected, voted } = this.state;
-
-    /*
-    if (poap.isLoadingTokens) {
-      return (
-        <Layout>
-          <div className="container">
-            <div className="loading-container">
-              <img src={kingOfLobstersSmall} alt="King of Lobsters" className="king-of-lobsters"/>
-              <div>
-                <h2>Cargando tus tokens...</h2>
-              </div>
-            </div>
-          </div>
-        </Layout>
-      );
-    }
-    */
+    let { selected, loading, loadingMessage, voted } = this.state;
 
     return (
       <Layout>
         <div className="container">
           <img src={kingOfLobstersSmall} alt="King of Lobsters" className="king-of-lobsters" />
 
-          {!w3.web3 && (
-            <div className="alert">
-              <div>Wanna vote? you need a web3 connection like MetaMask</div>
-            </div>
-          )}
+          {loading ? (
+            <Loader message={loadingMessage} />
+          ) : (
+            <div>
+              {!w3.web3 && (
+                <div className="alert">
+                  <div>Wanna vote? you need a web3 connection like MetaMask</div>
+                </div>
+              )}
 
-          {w3.web3 && !w3.account && (
-            <div className="alert">
-              <div className="alert-text">You should</div>
-              <button className="btn-sm" onClick={() => console.log('Click')}>
-                Connect to MetaMask
-              </button>
-            </div>
-          )}
+              {w3.web3 && !w3.account && (
+                <div className="alert">
+                  <div className="alert-text">You should</div>
+                  <button className="btn-sm" onClick={() => console.log('Click')}>
+                    Connect to MetaMask
+                  </button>
+                </div>
+              )}
 
-          {w3.web3 && w3.account && w3.tokens === 0 && (
-            <div className="alert">
-              <div>
-                You need POAP tokens to vote. Check with your kickback address or <a href="#">come see us…</a>
+              {w3.web3 && w3.account && w3.tokens === 0 && (
+                <div className="alert">
+                  <div>
+                    You need POAP tokens to vote. Check with your kickback address or <a href="#">come see us…</a>
+                  </div>
+                </div>
+              )}
+
+              {w3.web3 && w3.account && voted && (
+                <div className="alert">
+                  <div>You already voted but you can change you vote</div>
+                </div>
+              )}
+
+              <div className={'header'}>
+                <div>
+                  <h2 className="title">Elegí tu ganador</h2>
+                  <h3 className="subtitle">Usa tus tokens para votar</h3>
+                </div>
+                <div>
+                  {/* This component should appear only when we have an address */}
+                  <div className="badge-box">
+                    <img src={badge} className="poap-badge" />
+                    <div>{w3.tokens} Tokens</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid">
+                {Object.entries(lobsters).map(([id, lobster]) => (
+                  <VoteOption
+                    key={id}
+                    id={id}
+                    image={lobster.image}
+                    action={this.changeSelection}
+                    disabled={!this.canVote()}
+                    selected={selected === parseInt(id)}
+                    outFocus={!this.canVote()}
+                  />
+                ))}
+              </div>
+              <div className="intro">
+                <button className="btn-pink" onClick={() => this.submitVote()}>
+                  VOTE NOW!
+                </button>
               </div>
             </div>
           )}
-
-          {w3.web3 && w3.account && voted && (
-            <div className="alert">
-              <div>You already voted but you can change you vote</div>
-            </div>
-          )}
-
-          <div className={'header'}>
-            <div>
-              <h2 className="title">Elegí tu ganador</h2>
-              <h3 className="subtitle">Usa tus tokens para votar</h3>
-            </div>
-            <div>
-              {/* This component should appear only when we have an address */}
-              <div className="badge-box">
-                <img src={badge} className="poap-badge" />
-                <div>{w3.tokens} Tokens</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid">
-            {Object.entries(lobsters.options).map(([id, lobster]) => (
-              <VoteOption
-                key={id}
-                id={id}
-                image={lobster.image}
-                action={this.changeSelection}
-                disabled={!this.canVote()}
-                selected={selected === parseInt(id)}
-                outFocus={!this.canVote()}
-              />
-            ))}
-          </div>
-          <div className="intro">
-            <button className="btn-pink" onClick={this.vote}>
-              VOTE NOW!
-            </button>
-          </div>
         </div>
       </Layout>
     );

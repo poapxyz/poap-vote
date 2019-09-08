@@ -121,4 +121,8 @@ a:focus {
   padding: 10px 20px;
   border-radius: 28px;
   background-color: var(--violet);
+  &:hover{
+    box-shadow: 0px 15px 20px rgba(#6534ff, 0.4);
+    color: #fff;
+  }
 }

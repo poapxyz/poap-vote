@@ -5,14 +5,6 @@
   margin: 0 auto 50px auto;
 }
 
-.loading-container{
-  height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .title{
   @media only screen and (max-width: 480px) {
     text-align: center;
@@ -75,5 +67,5 @@
 }
 
 .alert-text {
-  padding-right: 20px;
+  padding-right: 15px;
 }
