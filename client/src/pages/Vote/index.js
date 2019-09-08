@@ -31,6 +31,7 @@ class Vote extends Component {
 
   componentDidMount = async () => {
     let { web3Request, web3Fetched, web3Failed, accountFetched, w3 } = this.props;
+    let {loadingMessage, loading} = this.state
     let web3 = w3.web3;
 
     if (!web3) {
@@ -56,6 +57,8 @@ class Vote extends Component {
         const accounts = await web3.eth.getAccounts();
         account = accounts[0];
         accountFetched(account);
+        // change loading msg
+        this.setState({loadingMessage: 'Fetching your tokens'})
       } catch (e) {
         console.log('Error fetching account:', e);
       }
@@ -64,6 +67,8 @@ class Vote extends Component {
         await this.fetchTokens(account);
         await this.fetchUserVote(account);
       }
+
+
 
       await this.fetchVoteOptions();
     }
@@ -79,6 +84,7 @@ class Vote extends Component {
     let { tokenContract } = this.state;
     let balance = await tokenContract.methods.balanceOf(account).call();
     this.props.tokensFetched(parseInt(balance));
+    this.setState({loadingMessage: 'Fetching votes'})
   };
 
   fetchUserVote = async account => {
@@ -95,6 +101,8 @@ class Vote extends Component {
   };
 
   fetchVoteOptions = async () => {
+    this.setState({loadingMessage: 'Fetching proposal'})
+
     let { voteContract } = this.state;
     let voteOptionsCount = await voteContract.methods.proposalNonce().call();
     const arrayTimes = Array.from({ length: voteOptionsCount });
@@ -110,6 +118,8 @@ class Vote extends Component {
       });
       counter++;
     }
+    this.setState({loading: false})
+
   };
 
   canVote = () => {
@@ -128,7 +138,7 @@ class Vote extends Component {
 
   render() {
     let { w3, lobsters } = this.props;
-    let { selected } = this.state;
+    let { selected, loading, loadingMessage } = this.state;
     let voted = false;
 
     return (
