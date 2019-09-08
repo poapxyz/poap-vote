@@ -31,7 +31,7 @@ const getWeb3 = () =>
         );
         const web3 = new Web3(provider);
         console.log('No web3 instance injected, using Infura/Local web3.');
-        resolve(web3.currentProvider);
+        resolve(web3);
       }
       reject('No web3');
     });
