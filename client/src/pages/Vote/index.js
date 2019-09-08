@@ -14,7 +14,7 @@ import VoteOption from '../../components/VoteOption';
 import kingOfLobstersSmall from '../../assets/images/king-of-lobsters-small.png';
 import badge from '../../assets/images/poap-badge.png';
 /* Utils */
-import { getWeb3 } from '../../utils/web3';
+import { getWeb3, getSigner } from '../../utils/web3';
 import CONSTANTS from '../../utils/constants';
 import ABI_TOKEN from '../../artifacts/Poap.json';
 import ABI_VOTE from '../../artifacts/VotePoap.json';
@@ -80,7 +80,9 @@ class Vote extends Component {
 
   fetchTokens = async account => {
     let { tokenContract } = this.state;
-    let balance = await tokenContract.methods.balanceOf(account).call();
+    let balance = await fetch(`https://api.poap.xyz/actions/scan/${account}`)
+      .then(res => res.json())
+      .then(data => data.length);
     this.props.tokensFetched(parseInt(balance));
     this.setState({ loadingMessage: 'Fetching votes' });
   };
@@ -144,13 +146,30 @@ class Vote extends Component {
   };
 
   submitVote = async () => {
-    let { selected, voteContract } = this.state;
+    let { selected } = this.state;
     let { w3 } = this.props;
     if (selected === '' || !w3.account) return;
 
     this.setState({ loading: true, loadingMessage: 'Submitting your vote' });
     try {
-      await voteContract.methods.vote(selected).send({ from: w3.account });
+      const signer = await getSigner();
+      const backMessage = w3.web3.utils.sha3(selected.toString());
+      const claimerSignature = await signer.signMessage(backMessage);
+      // const claimerSignature = await w3.web3.eth.personal.sign(backMessage, w3.account);
+
+      const response = await fetch('https://api.poap.xyz/actions/vote', {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          proposal: selected.toString(),
+          signature: claimerSignature,
+          address: w3.account,
+        }),
+      });
+      console.log('TX; ', response);
       this.props.history.push('/thanks');
     } catch (e) {
       this.setState({ loading: false, loadingMessage: '' });
