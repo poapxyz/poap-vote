@@ -52,7 +52,7 @@ class Home extends Component {
               500 <img src={dai} alt="DAI" />
             </div>
             <button className="btn" onClick={() => this.props.history.push('/vote')}>
-              Participate!
+              Take your pick!
             </button>
           </div>
         </div>
