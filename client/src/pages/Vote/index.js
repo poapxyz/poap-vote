@@ -85,7 +85,7 @@ class Vote extends Component {
     // 2: weightedVote
     // }
     if (parseInt(vote[1]) > 0) {
-      await this.setState({ voted: true, selected: parseInt(vote[10]) });
+      await this.setState({ voted: true, selected: parseInt(vote[0]) });
     }
   };
 
@@ -116,10 +116,18 @@ class Vote extends Component {
     this.setState({ selected: id });
   };
 
+  vote = async () => {
+    let { selected, voteContract } = this.state;
+    let { w3 } = this.props;
+    if (!selected || !w3.account) return;
+
+    let tx = await voteContract.methods.vote(selected).send({ from: w3.account });
+    console.log(tx);
+  };
+
   render() {
     let { w3, lobsters } = this.props;
-    let { selected } = this.state;
-    let voted = false;
+    let { selected, voted } = this.state;
 
     /*
     if (poap.isLoadingTokens) {
@@ -192,16 +200,15 @@ class Vote extends Component {
                 key={id}
                 id={id}
                 image={lobster.image}
-                // action={() => voteLobster(id)}
                 action={this.changeSelection}
                 disabled={!this.canVote()}
-                selected={selected === id}
+                selected={selected === parseInt(id)}
                 outFocus={!this.canVote()}
               />
             ))}
           </div>
           <div className="intro">
-            <button className="btn-pink" onClick={() => console.log('navigate')}>
+            <button className="btn-pink" onClick={this.vote}>
               VOTE NOW!
             </button>
           </div>
