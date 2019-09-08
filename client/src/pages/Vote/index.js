@@ -152,7 +152,6 @@ class Vote extends Component {
   };
 
   randomLoadingQuote() {
-    console.log('running');
     let random = QUOTES[Math.floor(Math.random() * QUOTES.length)];
     this.setState({ loadingMessage: random.quote });
   }
@@ -194,7 +193,6 @@ class Vote extends Component {
   render() {
     let { w3, lobsters } = this.props;
     let { selected, loading, loadingMessage, voted } = this.state;
-    console.log(this.props);
     return (
       <Layout>
         <div className="container">
@@ -222,7 +220,8 @@ class Vote extends Component {
               {w3.web3 && w3.account && w3.tokens === 0 && (
                 <div className="alert">
                   <div>
-                    You need POAP tokens to vote. Check with your kickback address or come see us at the center of the hacking area.
+                    You need POAP tokens to vote. Check with your kickback address or come see us at the center of the
+                    hacking area.
                   </div>
                 </div>
               )}

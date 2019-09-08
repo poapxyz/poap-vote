@@ -15,7 +15,7 @@ import shapeFront from '../../assets/images/shapeFront.png';
  */
 
 const VoteOption = props => {
-  const { image, action, disabled, selected, outFocus, id } = props;
+  const { image, action, disabled, selected, outFocus, id, votes } = props;
   return (
     <div
       className={`vote-option ${outFocus ? 'outFocus-option' : ''} ${disabled ? '' : 'vote-selectable'} ${
@@ -29,6 +29,7 @@ const VoteOption = props => {
         className="img-vote"
         style={{ backgroundImage: `url(${image})` }}
       />
+      {votes && <div style={{ textAlign: 'center' }}>Votes: {votes}</div>}
     </div>
   );
 };
