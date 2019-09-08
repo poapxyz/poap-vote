@@ -18,6 +18,8 @@ import { getWeb3 } from '../../utils/web3';
 import CONSTANTS from '../../utils/constants';
 import ABI_TOKEN from '../../artifacts/Poap.json';
 import ABI_VOTE from '../../artifacts/VotePoap.json';
+import QUOTES from '../../utils/loadingQuotes'
+
 
 class Vote extends Component {
   state = {
@@ -143,12 +145,21 @@ class Vote extends Component {
     this.setState({ selected: parseInt(id) });
   };
 
+  randomLoadingQuote(){
+    console.log('running')
+    let random = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    this.setState({loadingMessage: random.quote})
+  }
+
   submitVote = async () => {
     let { selected, voteContract } = this.state;
     let { w3 } = this.props;
     if (selected === '' || !w3.account) return;
 
-    this.setState({ loading: true, loadingMessage: 'Submitting your vote' });
+    this.setState({ loading: true, loadingMessage: 'Sending transaction vote' });
+    setInterval(() => this.randomLoadingQuote(), 3500);
+    
+
     try {
       await voteContract.methods.vote(selected).send({ from: w3.account });
       this.props.history.push('/thanks');
