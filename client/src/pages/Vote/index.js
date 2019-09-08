@@ -119,6 +119,21 @@ class Vote extends Component {
     this.setState({ loading: false });
   };
 
+  connectWallet = async () => {
+    let { w3 } = this.props;
+    if (w3.web3 && window.ethereum) {
+      await window.ethereum.enable();
+      try {
+        const accounts = await w3.web3.eth.getAccounts();
+        this.props.accountFetched(accounts[0]);
+        await this.fetchTokens(accounts[0]);
+        await this.fetchUserVote(accounts[0]);
+      } catch (e) {
+        console.log('Error fetching account:', e);
+      }
+    }
+  };
+
   canVote = () => {
     let { w3 } = this.props;
     return w3.web3 && w3.account && w3.tokens > 0;
@@ -165,8 +180,8 @@ class Vote extends Component {
               {w3.web3 && !w3.account && (
                 <div className="alert">
                   <div className="alert-text">You should</div>
-                  <button className="btn-sm" onClick={() => console.log('Click')}>
-                    Connect to MetaMask
+                  <button className="btn-sm" onClick={this.connectWallet}>
+                    Connect with your wallet
                   </button>
                 </div>
               )}
