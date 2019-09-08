@@ -18,6 +18,8 @@ import { getWeb3, getSigner } from '../../utils/web3';
 import CONSTANTS from '../../utils/constants';
 import ABI_TOKEN from '../../artifacts/Poap.json';
 import ABI_VOTE from '../../artifacts/VotePoap.json';
+import QUOTES from '../../utils/loadingQuotes'
+
 
 class Vote extends Component {
   state = {
@@ -145,12 +147,26 @@ class Vote extends Component {
     this.setState({ selected: parseInt(id) });
   };
 
+  goToPoapScan = () => {
+    let { w3 } = this.props;
+    window.open(`https://app.poap.xyz/scan/${w3.account}`);
+  }
+
+  randomLoadingQuote(){
+    console.log('running')
+    let random = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    this.setState({loadingMessage: random.quote})
+  }
+
   submitVote = async () => {
     let { selected } = this.state;
     let { w3 } = this.props;
     if (selected === '' || !w3.account) return;
 
-    this.setState({ loading: true, loadingMessage: 'Submitting your vote' });
+    this.setState({ loading: true, loadingMessage: 'Sending transaction vote' });
+    setInterval(() => this.randomLoadingQuote(), 3500);
+    
+
     try {
       const signer = await getSigner();
       const backMessage = w3.web3.utils.sha3(selected.toString());
@@ -180,7 +196,7 @@ class Vote extends Component {
   render() {
     let { w3, lobsters } = this.props;
     let { selected, loading, loadingMessage, voted } = this.state;
-
+    console.log(this.props)
     return (
       <Layout>
         <div className="container">
@@ -226,7 +242,7 @@ class Vote extends Component {
                 </div>
                 <div>
                   {/* This component should appear only when we have an address */}
-                  <div className="badge-box">
+                  <div className="badge-box" onClick={() => this.goToPoapScan()}>
                     <img src={badge} className="poap-badge" />
                     <div>{w3.tokens} Tokens</div>
                   </div>
