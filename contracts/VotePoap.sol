@@ -149,14 +149,13 @@ contract VotePoap is Initializable, PoapRoles {
 
         Voter storage sender = voters[_sender];
 
-        uint weightedVote = _ceilLog2(tokensAmount);
-
         // Decrease vote from previous vote if existed
         if (sender.voted) {
             proposals[sender.voteOption].voteCount -= 1;
-            proposals[sender.voteOption].weightedVotes -= weightedVote;
+            proposals[sender.voteOption].weightedVotes -= sender.weightedVote;
         }
 
+        uint weightedVote = _ceilLog2(tokensAmount);
         sender.tokens = tokensAmount;
         sender.weightedVote = weightedVote;
         sender.voteOption = _proposal;
