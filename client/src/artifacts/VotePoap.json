@@ -1,472 +1,460 @@
 [
   {
-    "constant":false,
-    "inputs":[
+    "constant": false,
+    "inputs": [
       {
-        "internalType":"uint256",
-        "name":"_proposal",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "_proposal",
+        "type": "uint256"
       }
     ],
-    "name":"vote",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "name": "vote",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "constant":true,
-    "inputs":[
+    "constant": true,
+    "inputs": [
       {
-        "internalType":"uint256",
-        "name":"",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name":"proposals",
-    "outputs":[
+    "name": "proposals",
+    "outputs": [
       {
-        "internalType":"string",
-        "name":"image",
-        "type":"string"
+        "internalType": "string",
+        "name": "image",
+        "type": "string"
       },
       {
-        "internalType":"uint256",
-        "name":"voteCount",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "voteCount",
+        "type": "uint256"
       },
       {
-        "internalType":"uint256",
-        "name":"weightedVotes",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "weightedVotes",
+        "type": "uint256"
       }
     ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "constant":false,
-    "inputs":[
-
-    ],
-    "name":"activate",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "constant": false,
+    "inputs": [],
+    "name": "activate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "constant":true,
-    "inputs":[
+    "constant": true,
+    "inputs": [
       {
-        "internalType":"address",
-        "name":"account",
-        "type":"address"
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       }
     ],
-    "name":"isAdmin",
-    "outputs":[
+    "name": "isAdmin",
+    "outputs": [
       {
-        "internalType":"bool",
-        "name":"",
-        "type":"bool"
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "constant":true,
-    "inputs":[
-
-    ],
-    "name":"isExpired",
-    "outputs":[
+    "constant": true,
+    "inputs": [],
+    "name": "isExpired",
+    "outputs": [
       {
-        "internalType":"bool",
-        "name":"expired",
-        "type":"bool"
+        "internalType": "bool",
+        "name": "expired",
+        "type": "bool"
       }
     ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "constant":false,
-    "inputs":[
+    "constant": false,
+    "inputs": [
       {
-        "internalType":"string",
-        "name":"_image",
-        "type":"string"
+        "internalType": "string",
+        "name": "_image",
+        "type": "string"
       }
     ],
-    "name":"addProposal",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "name": "addProposal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "constant":false,
-    "inputs":[
-
-    ],
-    "name":"deactivate",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "constant": false,
+    "inputs": [],
+    "name": "deactivate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "constant":false,
-    "inputs":[
+    "constant": false,
+    "inputs": [
       {
-        "internalType":"address",
-        "name":"_token",
-        "type":"address"
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
       },
       {
-        "internalType":"uint256",
-        "name":"_endDate",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "_endDate",
+        "type": "uint256"
       },
       {
-        "internalType":"address[]",
-        "name":"_admins",
-        "type":"address[]"
+        "internalType": "address[]",
+        "name": "_admins",
+        "type": "address[]"
       }
     ],
-    "name":"initialize",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "constant":true,
-    "inputs":[
-
-    ],
-    "name":"voteActive",
-    "outputs":[
+    "constant": true,
+    "inputs": [],
+    "name": "voteActive",
+    "outputs": [
       {
-        "internalType":"bool",
-        "name":"",
-        "type":"bool"
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "constant":false,
-    "inputs":[
+    "constant": false,
+    "inputs": [
       {
-        "internalType":"address",
-        "name":"account",
-        "type":"address"
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       }
     ],
-    "name":"addAdmin",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "name": "addAdmin",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "constant":false,
-    "inputs":[
-
-    ],
-    "name":"renounceAdmin",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "constant": false,
+    "inputs": [],
+    "name": "renounceAdmin",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "constant":true,
-    "inputs":[
+    "constant": true,
+    "inputs": [
       {
-        "internalType":"address",
-        "name":"_voter",
-        "type":"address"
+        "internalType": "address",
+        "name": "_voter",
+        "type": "address"
       }
     ],
-    "name":"getVote",
-    "outputs":[
+    "name": "getVote",
+    "outputs": [
       {
-        "internalType":"uint256",
-        "name":"",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       },
       {
-        "internalType":"uint256",
-        "name":"",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       },
       {
-        "internalType":"uint256",
-        "name":"",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "constant":true,
-    "inputs":[
+    "constant": true,
+    "inputs": [
       {
-        "internalType":"address",
-        "name":"",
-        "type":"address"
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
-    "name":"voters",
-    "outputs":[
+    "name": "voters",
+    "outputs": [
       {
-        "internalType":"uint256",
-        "name":"tokens",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "tokens",
+        "type": "uint256"
       },
       {
-        "internalType":"uint256",
-        "name":"weightedVote",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "weightedVote",
+        "type": "uint256"
       },
       {
-        "internalType":"uint256",
-        "name":"voteOption",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "voteOption",
+        "type": "uint256"
       },
       {
-        "internalType":"bool",
-        "name":"voted",
-        "type":"bool"
+        "internalType": "bool",
+        "name": "voted",
+        "type": "bool"
       }
     ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "constant":true,
-    "inputs":[
-
-    ],
-    "name":"endDate",
-    "outputs":[
+    "constant": true,
+    "inputs": [],
+    "name": "endDate",
+    "outputs": [
       {
-        "internalType":"uint256",
-        "name":"",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "constant":false,
-    "inputs":[
+    "constant": false,
+    "inputs": [
       {
-        "internalType":"address",
-        "name":"sender",
-        "type":"address"
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
       }
     ],
-    "name":"initialize",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "constant":true,
-    "inputs":[
+    "constant": false,
+    "inputs": [
       {
-        "internalType":"uint256",
-        "name":"_proposal",
-        "type":"uint256"
-      }
-    ],
-    "name":"getProposal",
-    "outputs":[
-      {
-        "internalType":"string",
-        "name":"",
-        "type":"string"
+        "internalType": "uint256",
+        "name": "_index",
+        "type": "uint256"
       },
       {
-        "internalType":"uint256",
-        "name":"",
-        "type":"uint256"
+        "internalType": "string",
+        "name": "_image",
+        "type": "string"
+      }
+    ],
+    "name": "changeProposal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_proposal",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProposal",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
       },
       {
-        "internalType":"uint256",
-        "name":"",
-        "type":"uint256"
-      }
-    ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
-  },
-  {
-    "constant":true,
-    "inputs":[
-
-    ],
-    "name":"proposalNonce",
-    "outputs":[
-      {
-        "internalType":"uint256",
-        "name":"",
-        "type":"uint256"
-      }
-    ],
-    "payable":false,
-    "stateMutability":"view",
-    "type":"function"
-  },
-  {
-    "constant":false,
-    "inputs":[
-      {
-        "internalType":"address",
-        "name":"_signer",
-        "type":"address"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       },
       {
-        "internalType":"uint256",
-        "name":"_proposal",
-        "type":"uint256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name":"relayedVote",
-    "outputs":[
-
-    ],
-    "payable":false,
-    "stateMutability":"nonpayable",
-    "type":"function"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "anonymous":false,
-    "inputs":[
+    "constant": true,
+    "inputs": [],
+    "name": "proposalNonce",
+    "outputs": [
       {
-        "indexed":false,
-        "internalType":"address",
-        "name":"account",
-        "type":"address"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name":"_Activated",
-    "type":"event"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "anonymous":false,
-    "inputs":[
+    "constant": false,
+    "inputs": [
       {
-        "indexed":false,
-        "internalType":"address",
-        "name":"account",
-        "type":"address"
-      }
-    ],
-    "name":"_Deactivated",
-    "type":"event"
-  },
-  {
-    "anonymous":false,
-    "inputs":[
-      {
-        "indexed":false,
-        "internalType":"uint256",
-        "name":"index",
-        "type":"uint256"
+        "internalType": "address",
+        "name": "_signer",
+        "type": "address"
       },
       {
-        "indexed":false,
-        "internalType":"string",
-        "name":"image",
-        "type":"string"
+        "internalType": "uint256",
+        "name": "_proposal",
+        "type": "uint256"
       }
     ],
-    "name":"_ProposalAdded",
-    "type":"event"
+    "name": "relayedVote",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "anonymous":false,
-    "inputs":[
+    "anonymous": false,
+    "inputs": [
       {
-        "indexed":false,
-        "internalType":"address",
-        "name":"account",
-        "type":"address"
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "_Activated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "_Deactivated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
       },
       {
-        "indexed":false,
-        "internalType":"uint256",
-        "name":"vote",
-        "type":"uint256"
+        "indexed": false,
+        "internalType": "string",
+        "name": "image",
+        "type": "string"
+      }
+    ],
+    "name": "_ProposalAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       },
       {
-        "indexed":false,
-        "internalType":"uint256",
-        "name":"weightedVote",
-        "type":"uint256"
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "vote",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "weightedVote",
+        "type": "uint256"
       }
     ],
-    "name":"_Vote",
-    "type":"event"
+    "name": "_Vote",
+    "type": "event"
   },
   {
-    "anonymous":false,
-    "inputs":[
+    "anonymous": false,
+    "inputs": [
       {
-        "indexed":true,
-        "internalType":"address",
-        "name":"account",
-        "type":"address"
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       }
     ],
-    "name":"AdminAdded",
-    "type":"event"
+    "name": "AdminAdded",
+    "type": "event"
   },
   {
-    "anonymous":false,
-    "inputs":[
+    "anonymous": false,
+    "inputs": [
       {
-        "indexed":true,
-        "internalType":"address",
-        "name":"account",
-        "type":"address"
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       }
     ],
-    "name":"AdminRemoved",
-    "type":"event"
+    "name": "AdminRemoved",
+    "type": "event"
   }
 ]

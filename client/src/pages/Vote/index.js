@@ -125,18 +125,22 @@ class Vote extends Component {
   };
 
   changeSelection = id => {
-    this.setState({ selected: id });
+    this.setState({ selected: parseInt(id) });
   };
 
   submitVote = async () => {
     let { selected, voteContract } = this.state;
     let { w3 } = this.props;
-    if (!selected || !w3.account) return;
+    if (selected === '' || !w3.account) return;
 
     this.setState({ loading: true, loadingMessage: 'Submitting your vote' });
-    let tx = await voteContract.methods.vote(selected).send({ from: w3.account });
-    console.log(tx);
-    setTimeout(() => this.props.history.push('/thanks'), 3000);
+    try {
+      await voteContract.methods.vote(selected).send({ from: w3.account });
+      this.props.history.push('/thanks');
+    } catch (e) {
+      this.setState({ loading: false, loadingMessage: '' });
+      console.log('Error: ', e);
+    }
   };
 
   render() {
@@ -196,20 +200,22 @@ class Vote extends Component {
               </div>
 
               <div className="grid">
-                {Object.entries(lobsters).map(([id, lobster]) => (
-                  <VoteOption
-                    key={id}
-                    id={id}
-                    image={lobster.image}
-                    action={this.changeSelection}
-                    disabled={!this.canVote()}
-                    selected={selected === parseInt(id)}
-                    outFocus={!this.canVote()}
-                  />
-                ))}
+                {Object.entries(lobsters.options).map(([id, lobster]) => {
+                  return (
+                    <VoteOption
+                      key={id}
+                      id={id}
+                      image={lobster.image}
+                      action={this.changeSelection}
+                      disabled={!this.canVote()}
+                      selected={selected === parseInt(id)}
+                      outFocus={!this.canVote()}
+                    />
+                  );
+                })}
               </div>
               <div className="intro">
-                <button className="btn-pink" onClick={() => this.submitVote()}>
+                <button className="btn-pink" onClick={this.submitVote}>
                   VOTE NOW!
                 </button>
               </div>
