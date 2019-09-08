@@ -3,6 +3,8 @@
   max-width: 258px;
   margin-bottom: 50px;
   margin: 0 auto 50px auto;
+  color: #4b4b4b;
+
 }
 
 .title{
@@ -12,7 +14,14 @@
 }
 
 .subtitle {
-  color: #757575
+  color: #757575;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  img {
+    margin-left: 20px;
+  }
 }
 
 .thanks{

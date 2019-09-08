@@ -9,6 +9,7 @@ import './styles.scss';
 import Layout from '../../components/Layout';
 import kingOfLobstersSmall from '../../assets/images/king-of-lobsters-small.png';
 import badgePoap from '../../assets/images/poap-badge.png';
+import dai from '../../assets/images/dai-2.svg';
 
 class Thanks extends Component {
   submitVote = () => {
@@ -26,7 +27,7 @@ class Thanks extends Component {
           <div className="thanks">
             <h1>Congratulations!</h1>
             <img src={badgePoap} alt="King of Lobsters" />
-            <h2>You are participating for 500 dai!</h2>
+            <h2 className="subtitle">You are participating for 500 <img src={dai} alt="DAI" /></h2>
           </div>
         </div>
       </Layout>
