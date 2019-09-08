@@ -5,12 +5,11 @@
 const env = require('dotenv');
 const abi = require('../build/contracts/VotePoap.json');
 
-// const newProposalURL = 'https://voting.poap.xyz/proposals/proposal1.png';
-const newProposalURL = 'https://voting.poap.xyz/proposals/proposal2.png';
-// const newProposalURL = 'https://voting.poap.xyz/proposals/proposal3.png';
+const newProposalURL = 'https://voting.poap.xyz/proposals/proposal1.png';
+const proposal = 0;
 
 module.exports = (done) => {
-  async function uploadProposal(networkID) {
+  async function updateProposal(networkID) {
     const result = env.config();
 
     if (result.error || newProposalURL === '') {
@@ -23,7 +22,7 @@ module.exports = (done) => {
     }
     const contract = new web3.eth.Contract(abi.abi, contractAddress);
     const accounts = await web3.eth.getAccounts();
-    const tx = await contract.methods.addProposal(newProposalURL).send({
+    const tx = await contract.methods.changeProposal(proposal, newProposalURL).send({
       from: accounts[0], gas: 10000000000
     })
 
@@ -41,6 +40,6 @@ module.exports = (done) => {
       console.log('Error detected!');
       return done(err); // truffle exec exits if an error gets returned
     }
-    return uploadProposal(network).then(() => done());
+    return updateProposal(network).then(() => done());
   });
 };
