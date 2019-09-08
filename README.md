@@ -37,7 +37,6 @@ This is quite embarrassing because we should have known this before, but a big l
 
 ## What's next for POAP Vote
 
-
 Everything we have built is open source and we encourage people to use our codebase to fill their own needs. We want to work on documentation and code examples so POAP Vote an grow on it's own without us needed to be behind it forever.
 
 ## Attention hackers!!
@@ -50,6 +49,6 @@ If you attended ETHBoston and staked on Kickback, check out your POAP collection
  - OpenZeppellin
  
 ## Authors
-Patricio Worthalter  - https://github.com/poapxyz
-Bruno Balzani - https://github.com/brunitob
-Ramiro Gonzalez - https://github.com/ragonzal
+- Bruno Balzani - https://github.com/brunitob
+- Patricio Worthalter  - https://github.com/poapxyz
+- Ramiro Gonzalez - https://github.com/ragonzal
