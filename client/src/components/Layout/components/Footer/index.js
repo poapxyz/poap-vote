@@ -3,10 +3,11 @@ import React from 'react';
 import twitter from '../../../../assets/images/logo-twitter.svg';
 import telegram from '../../../../assets/images/logo-telegram.svg';
 import github from '../../../../assets/images/logo-git.svg';
-import background from '../../../../assets/images/footerm.svg';
 import './styles.scss';
 
-const Footer = () => {
+const Footer = ({ hide }) => {
+  if (hide) return <div className={'no-footer'} />;
+
   return (
     <footer>
       <div className="title">Need Help?</div>

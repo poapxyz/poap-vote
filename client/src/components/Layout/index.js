@@ -8,13 +8,13 @@ import Footer from './components/Footer';
 /* Styles */
 import './styles.scss';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, hideFooter }) => {
   return (
     <main className="main">
       <Banner />
       <NavBar />
       {children}
-      <Footer />
+      <Footer hide={hideFooter} />
     </main>
   );
 };

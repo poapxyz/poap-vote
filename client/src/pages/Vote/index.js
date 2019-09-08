@@ -194,14 +194,14 @@ class Vote extends Component {
     let { w3, lobsters } = this.props;
     let { selected, loading, loadingMessage, voted } = this.state;
     return (
-      <Layout>
+      <Layout hideFooter={window.innerWidth < 500}>
         <div className="container">
           <img src={kingOfLobstersSmall} alt="King of Lobsters" className="king-of-lobsters" />
 
           {loading ? (
             <Loader message={loadingMessage} />
           ) : (
-            <div>
+            <div className={'vote-container'}>
               {!w3.web3 && (
                 <div className="alert">
                   <div>Wanna vote? you need a web3 provider like MetaMask or Trust Wallet</div>

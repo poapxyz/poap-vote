@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .king-of-lobsters {
   display: block;
   max-width: 258px;
@@ -6,7 +8,7 @@
 }
 
 .title{
-  @media only screen and (max-width: 480px) {
+  @media only screen and (max-width: $bp-sw) {
     text-align: center;
   }
 }
@@ -72,4 +74,22 @@
 
 .alert-text {
   padding-right: 15px;
+}
+
+.vote-container{
+  @media only screen and (max-width: $bp-sw) {
+    .intro{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 20px 0;
+      background: var(--light-white-blue);
+      box-shadow: 0px 10px 10px 15px rgba(100, 50, 255, 0.15);
+
+      button {
+        text-align: center;
+        font-size: 24px;
+      }
+    }
+  }
 }
