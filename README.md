@@ -1,5 +1,7 @@
 # POAP Vote
 
+![POAP Vote](https://github.com/poapxyz/poap-vote/blob/master/demo/poap-vote.gif "Demo")
+
 ## Inspiration
 
 Decentralized protocols (like Ethereum but also tens of others) are particularly hard to govern. It's evident that the lack of efficient instruments to do collective decision making reduce the speed of technology progress.
