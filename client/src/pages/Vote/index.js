@@ -189,13 +189,13 @@ class Vote extends Component {
             <div>
               {!w3.web3 && (
                 <div className="alert">
-                  <div>Wanna vote? you need a web3 connection like MetaMask</div>
+                  <div>Wanna vote? you need a web3 provider like MetaMask or Trust Wallet</div>
                 </div>
               )}
 
               {w3.web3 && !w3.account && (
                 <div className="alert">
-                  <div className="alert-text">You should</div>
+                  <div className="alert-text">You must</div>
                   <button className="btn-sm" onClick={this.connectWallet}>
                     Connect with your wallet
                   </button>
@@ -205,21 +205,21 @@ class Vote extends Component {
               {w3.web3 && w3.account && w3.tokens === 0 && (
                 <div className="alert">
                   <div>
-                    You need POAP tokens to vote. Check with your kickback address or <a href="#">come see us…</a>
+                    You need POAP tokens to vote. Check with your kickback address or come see us at the center of the hacking area.
                   </div>
                 </div>
               )}
 
               {w3.web3 && w3.account && voted && (
                 <div className="alert">
-                  <div>You already voted but you can change you vote</div>
+                  <div>You already voted but you can change your pick</div>
                 </div>
               )}
 
               <div className={'header'}>
                 <div>
-                  <h2 className="title">Elegí tu ganador</h2>
-                  <h3 className="subtitle">Usa tus tokens para votar</h3>
+                  <h2 className="title">Pick a winner</h2>
+                  <h3 className="subtitle">Your vote weight is based on the amount of POAP Tokens you hold </h3>
                 </div>
                 <div>
                   {/* This component should appear only when we have an address */}
@@ -247,7 +247,7 @@ class Vote extends Component {
               </div>
               <div className="intro">
                 <button className="btn-pink" onClick={this.submitVote}>
-                  VOTE NOW!
+                  SUBMIT YOUR VOTE!
                 </button>
               </div>
             </div>
