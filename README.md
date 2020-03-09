@@ -10,7 +10,7 @@ Decentralized protocols (like Ethereum but also tens of others) are particularly
 
 ## What it does
 
-POAP Vote is an open source, easy to fork, framework for anyone to ask questions (as in polls) to larger audiences preserving privacy but with notably strong sybil resistance. Because it's virtually imposible for a single human to get two POAP tokens, the community can be sure that the polls are not attacked by bot armies or dark DAOs.
+POAP Vote is an open source, easy to fork, framework for anyone to ask questions (as in polls) to larger audiences preserving privacy but with notably strong sybil resistance. Because it's virtually impossible for a single human to get two POAP tokens, the community can be sure that the polls are not attacked by bot armies or dark DAOs.
 
 The polls can be run at very low or even no cost at all if done on a second layer. The Ethereum blockchain offers great composability and the capacity to add crypto-economic mechanics like incentives or punishments.
 
@@ -19,11 +19,11 @@ The polls can be run at very low or even no cost at all if done on a second laye
 
 We had an ambitious initial idea and we had to tone it down so it could be built by only two full stack devs.
 
-With the intention of showcasing the potential of the technology in a playful manner, the King of the Lobster contest was launch. Six friends volunteered to have pictures of them taken featuring fun Lobster-themed objects.
+With the intention of showcasing the potential of the technology in a playful manner, the King of the Lobster contest was launched. Six friends volunteered to have pictures of them taken featuring fun Lobster-themed objects.
 
-All the +200 hackathon attendees had POAP tokens given by Ethglobal so we made them elegible for voting to pick who should be crowned King or Queen of lobsters.
+All the +200 hackathon attendees had POAP tokens given by Ethglobal so we made them eligible for voting to pick who should be crowned King or Queen of lobsters.
 
-Most of the people at the hackathon are busy building their hacks so we announced that one random voters was going to be awarded 500 DAI.
+Most of the people at the hackathon are busy building their hacks so we announced that one random voter was going to be awarded 500 DAI.
 
 
 ## Challenges we ran into
@@ -32,12 +32,11 @@ We faced challenges of all sorts. First and embarrassingly typical: scope creep.
  
 ## Accomplishments that we're proud of
 
-We are particularly proud of having completed a well rounded product that works on [mainnet](https://etherscan.io/address/0x0635a20E091Ad352301e0e7F0039a61518e4Dc17), that we are seeing people are loving and with serious potential for having authentic product market fit. POAP Vote could not exist without a reliable and censorship resistant blockchain so it feels exciting to be pioneers on the Decentralized ledger technology space. The usage of meta transactions has really eased the experience for users, as they can vote by just signing a message without having to have ETH on the wallet for covering the cost of the gas.
+We are particularly proud of having completed a well rounded product that works on [mainnet](https://etherscan.io/address/0x0635a20E091Ad352301e0e7F0039a61518e4Dc17), that we are seeing people are loving and that has serious potential for having authentic product market fit. POAP Vote could not exist without a reliable and censorship resistant blockchain so it feels exciting to be pioneers on the Decentralized ledger technology space. The usage of meta transactions has really eased the experience for users, as they can vote by just signing a message without having to have ETH on the wallet for covering the cost of the gas.
 
 ## What we learned
 
 This is quite embarrassing because we should have known this before, but a big lesson was: blockchain dapps requires serious and extense end user testing. There are so many moving parts that for creating a seamless experience everything needs to be tested and proven beforehand.
-
 
 ## What's next for POAP Vote
 
